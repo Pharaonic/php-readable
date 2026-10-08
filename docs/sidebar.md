@@ -1,0 +1,19 @@
+- Getting Started
+  - [Overview](#overview)
+  - [Installation](#installation)
+  - [Basic Usage](#basic-usage)
+  - [Locales & Intl](#locales)
+- Usage
+  - [Numbers](#numbers)
+  - [Byte Sizes](#bytes)
+  - [Money](#money)
+  - [Durations](#durations)
+  - [Strings](#strings)
+  - [Arrays](#arrays)
+- API Reference
+  - [Methods](#api-reference)
+- Examples
+  - [Use Cases](#examples)
+  - [Troubleshooting](#troubleshooting)
+- Community
+  - [Contributors](#contributors)
