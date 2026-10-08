@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented in this file.
 
+## 8.3.0 - Unreleased
+
+The `8.3.x` line targets PHP 8.3. Output is identical to `8.2.0`.
+
+### Changed
+
+- **Requires PHP `>=8.3 <8.4`.** Use the `8.2.x` line on PHP 8.2.
+- Class constants are typed.
+- Integers are formatted with `number_format()`, which keeps them exact since PHP 8.3, instead of a hand-written digit grouping.
+- PHPStan analyses against PHP 8.3, and CI falls back to PHP 8.3 on branches that are not an `8.N.x` line.
+
 ## 8.2.0 - Unreleased
 
 The `8.2.x` line targets PHP 8.2. Output is identical to `8.1.0`.
