@@ -4,7 +4,7 @@ Install the package with Composer. There is nothing to register, publish or conf
 
 ### Requirements
 
-- PHP 8.0.x (each `8.x` release line targets the matching PHP version)
+- PHP 8.5.x (each `8.x` release line targets the matching PHP version)
 - `ext-mbstring`
 - `ext-intl` *(optional)*: only needed when you pass a `$locale`
 

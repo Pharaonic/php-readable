@@ -9,6 +9,10 @@ Each release line targets exactly one PHP version, and the branch name tells you
 ```text
 8.0.x → PHP 8.0
 8.1.x → PHP 8.1
+8.2.x → PHP 8.2
+8.3.x → PHP 8.3
+8.4.x → PHP 8.4
+8.5.x → PHP 8.5
 ...
 ```
 
@@ -35,8 +39,8 @@ git remote add upstream https://github.com/Pharaonic/php-readable.git
 Check out the branch that matches the PHP version you are targeting:
 
 ```bash
-git checkout 8.0.x
-git pull upstream 8.0.x
+git checkout 8.5.x
+git pull upstream 8.5.x
 ```
 
 ## Create a working branch

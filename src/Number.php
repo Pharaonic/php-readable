@@ -16,16 +16,16 @@ use Pharaonic\Readable\Support\Intl;
  */
 final class Number
 {
-    private const COMPACT_UNITS = ['', 'K', 'M', 'B', 'T'];
+    private const array COMPACT_UNITS = ['', 'K', 'M', 'B', 'T'];
 
-    private const ONES = [
+    private const array ONES = [
         'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
         'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
     ];
 
-    private const TENS = [2 => 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    private const array TENS = [2 => 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
-    private const SCALES = [
+    private const array SCALES = [
         '', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion',
         'sextillion', 'septillion', 'octillion', 'nonillion', 'decillion',
     ];
@@ -54,9 +54,7 @@ final class Number
             return Intl::result($formatter->format($number), $formatter);
         }
 
-        $formatted = is_int($number)
-            ? self::groupInteger($number, $decimals)
-            : number_format($number, $decimals, '.', ',');
+        $formatted = number_format($number, $decimals, '.', ',');
 
         return $trimZeros && $decimals > 0 ? rtrim(rtrim($formatted, '0'), '.') : $formatted;
     }
@@ -173,18 +171,6 @@ final class Number
         }
 
         return ($negative && $words !== 'zero' ? 'minus ' : '') . $words;
-    }
-
-    /**
-     * Group an integer's digits without going through float: number_format() converts ints to float,
-     * which loses precision past 2^53.
-     */
-    private static function groupInteger(int $number, int $decimals): string
-    {
-        $digits = ltrim((string) $number, '-');
-        $grouped = strrev(implode(',', str_split(strrev($digits), 3)));
-
-        return ($number < 0 ? '-' : '') . $grouped . ($decimals > 0 ? '.' . str_repeat('0', $decimals) : '');
     }
 
     /**

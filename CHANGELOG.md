@@ -2,6 +2,58 @@
 
 All notable changes to this project are documented in this file.
 
+## 8.5.0 - 2026-10-08
+
+The `8.5.x` line targets PHP 8.5. Output is identical to `8.4.0`.
+
+### Changed
+
+- **Requires PHP `>=8.5 <8.6`.** Use the `8.4.x` line on PHP 8.4.
+- `Str::initials()` uses the native `array_first()` and `array_last()`.
+- PHPStan analyses against PHP 8.5, and CI falls back to PHP 8.5 on branches that are not an `8.N.x` line.
+
+## 8.4.0 - 2026-10-08
+
+The `8.4.x` line targets PHP 8.4. Output is identical to `8.3.0`.
+
+### Changed
+
+- **Requires PHP `>=8.4 <8.5`.** Use the `8.3.x` line on PHP 8.3.
+- `Arr::isNull()` and `Arr::isMultidimensional()` use the native `array_any()`.
+- PHPStan analyses against PHP 8.4, and CI falls back to PHP 8.4 on branches that are not an `8.N.x` line.
+
+## 8.3.0 - 2026-10-08
+
+The `8.3.x` line targets PHP 8.3. Output is identical to `8.2.0`.
+
+### Changed
+
+- **Requires PHP `>=8.3 <8.4`.** Use the `8.2.x` line on PHP 8.2.
+- Class constants are typed.
+- Integers are formatted with `number_format()`, which keeps them exact since PHP 8.3, instead of a hand-written digit grouping.
+- PHPStan analyses against PHP 8.3, and CI falls back to PHP 8.3 on branches that are not an `8.N.x` line.
+
+## 8.2.0 - 2026-10-08
+
+The `8.2.x` line targets PHP 8.2. Output is identical to `8.1.0`.
+
+### Changed
+
+- **Requires PHP `>=8.2 <8.3`.** Use the `8.1.x` line on PHP 8.1.
+- PHPStan analyses against PHP 8.2, and CI falls back to PHP 8.2 on branches that are not an `8.N.x` line.
+
+## 8.1.0 - 2026-10-08
+
+The `8.1.x` line targets PHP 8.1. Output is identical to `8.0.1`, except for `Duration::between()` on days with a daylight saving time change.
+
+### Changed
+
+- **Requires PHP `>=8.1 <8.2`.** Use the `8.0.x` line on PHP 8.0.
+- `Arr::isList()` uses the native `array_is_list()`.
+- `Duration::between()` uses the native `DateTimeInterface::diff()` directly. Hours on a day with a DST change now count the time that actually elapsed: 00:00 → 06:00 on a spring-forward day is `"5 hours"` (was `"6 hours"`). Whole days are unchanged.
+- The test suite fails on PHP deprecations.
+- PHPStan analyses against PHP 8.1, and CI falls back to PHP 8.1 on branches that are not an `8.N.x` line.
+
 ## 8.0.1 - 2026-10-08
 
 ### Fixed

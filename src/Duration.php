@@ -6,7 +6,6 @@ namespace Pharaonic\Readable;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use DateTimeZone;
 use Exception;
 use InvalidArgumentException;
 
@@ -18,7 +17,7 @@ final class Duration
     /**
      * Unit => [singular, plural, short].
      */
-    private const NAMES = [
+    private const array NAMES = [
         'year' => ['year', 'years', 'y'],
         'month' => ['month', 'months', 'mo'],
         'week' => ['week', 'weeks', 'w'],
@@ -31,7 +30,7 @@ final class Duration
     /**
      * Fixed-length units used for a bare number of seconds. Months are left out because they have no fixed length.
      */
-    private const SECONDS = [
+    private const array SECONDS = [
         'year' => 31536000, // 365 days
         'week' => 604800,
         'day' => 86400,
@@ -67,7 +66,8 @@ final class Duration
      * Format the calendar difference between two moments: ('2024-01-01', '2025-03-15') → "1 year 2 months 2 weeks".
      *
      * Accepts DateTimeInterface objects, Unix timestamps and strings understood by DateTimeImmutable.
-     * Order does not matter. Uses native DateTimeInterface::diff(), so months and years follow the calendar.
+     * Order does not matter. Uses native DateTimeInterface::diff(), so months and years follow the calendar,
+     * whole days follow the wall clock across DST changes, and hours count the time that actually elapsed.
      *
      * @throws InvalidArgumentException When a string is not a valid date.
      */
@@ -78,8 +78,7 @@ final class Duration
         bool $short = false,
         string $separator = ' '
     ): string {
-        [$start, $end] = self::utc(self::date($start), self::date($end));
-        $interval = $start->diff($end);
+        $interval = self::date($start)->diff(self::date($end));
 
         return self::render([
             'year' => $interval->y,
@@ -127,31 +126,6 @@ final class Duration
         }
 
         return $value . ' ' . ($value === 1 ? $singular : $plural);
-    }
-
-    /**
-     * PHP 8.0's diff() miscounts days across months in non-UTC zones, so diff in UTC instead.
-     * Moments in the same zone keep their wall-clock time, so a day across a DST change is "1 day"
-     * and 00:00 → 06:00 on a spring-forward day is "6 hours". Moments in different zones are
-     * compared as absolute instants.
-     *
-     * @return array{DateTimeImmutable, DateTimeImmutable}
-     */
-    private static function utc(DateTimeInterface $start, DateTimeInterface $end): array
-    {
-        $utc = new DateTimeZone('UTC');
-
-        if ($start->getTimezone()->getName() === $end->getTimezone()->getName()) {
-            return [
-                new DateTimeImmutable($start->format('Y-m-d H:i:s.u'), $utc),
-                new DateTimeImmutable($end->format('Y-m-d H:i:s.u'), $utc),
-            ];
-        }
-
-        return [
-            DateTimeImmutable::createFromInterface($start)->setTimezone($utc),
-            DateTimeImmutable::createFromInterface($end)->setTimezone($utc),
-        ];
     }
 
     private static function date(DateTimeInterface|int|string $value): DateTimeInterface
