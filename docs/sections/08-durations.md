@@ -30,7 +30,7 @@ Duration::between($order->created_at, new DateTimeImmutable());
 Moments in different time zones are compared as instants.
 
 :::warning Daylight saving time
-Within one time zone, `between()` counts on the wall clock: 12:00 to 12:00 across a DST change is `"1 day"`, and 00:00 → 06:00 on a spring-forward day is `"6 hours"`, even though 5 hours elapsed.
+Within one time zone, whole days follow the wall clock: 12:00 to 12:00 across a DST change is `"1 day"`, even though 23 hours elapsed. Hours count the time that actually elapsed: 00:00 → 06:00 on a spring-forward day is `"5 hours"`.
 :::
 
 ### Options

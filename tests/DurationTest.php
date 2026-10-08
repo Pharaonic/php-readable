@@ -126,11 +126,11 @@ final class DurationTest extends TestCase
         );
     }
 
-    public function testBetweenCountsHoursOnTheWallClockAcrossDaylightSaving(): void
+    public function testBetweenCountsElapsedHoursAcrossDaylightSaving(): void
     {
         $zone = new DateTimeZone('Europe/Helsinki');
 
-        self::assertSame('6 hours', Duration::between(
+        self::assertSame('5 hours', Duration::between(
             new DateTimeImmutable('2021-03-28 00:00', $zone),
             new DateTimeImmutable('2021-03-28 06:00', $zone)
         ));
