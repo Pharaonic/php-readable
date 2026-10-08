@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## 8.0.1 - 2026-10-08
+
+### Fixed
+
+- Documentation: the overview feature cards lost their inline code examples on pharaonic.dev, leaving text such as ", , , and". They are now written as plain text.
+
 ## 8.0.0 - 2026-10-08
 
 ### Added

@@ -10,22 +10,22 @@ Human-friendly formatting for plain PHP. Readable turns raw values into text peo
 
 :::features
 ### Numbers {icon="chart"}
-`Number::format()`, `compact()`, `percentage()`, `ordinal()` and `spell()`: `1,234,567`, `1.2M`, `75%`, `21st`, `twenty-one`.
+Grouped, compact, percentage, ordinal and spelled-out numbers: 1,234,567, 1.2M, 75%, 21st and twenty-one.
 
 ### Byte Sizes {icon="database"}
-`Bytes::format(1500)` → `1.5 KB`, `Bytes::format(1536, binary: true)` → `1.5 KiB`, and `Bytes::parse('10 MB')` back to `10000000`.
+1500 bytes become 1.5 KB, 1536 bytes become 1.5 KiB, and "10 MB" parses back to 10000000.
 
 ### Money {icon="tag"}
-`Money::format(1234.5, 'USD')` → `USD 1,234.50`, with ISO 4217 minor units for every currency.
+1234.5 USD becomes USD 1,234.50, with the ISO 4217 minor units of every currency.
 
 ### Durations {icon="clock"}
-`Duration::format(3661)` → `1 hour 1 minute 1 second`, and `Duration::between()` for calendar-exact date differences.
+3661 seconds become 1 hour 1 minute 1 second, and two dates give a calendar-exact difference.
 
 ### Strings & Arrays {icon="code"}
-`Str::initials('Moamen Eltouny')` → `ME`, plus `Arr::isNull()`, `isMultidimensional()` and `isList()`.
+Initials for avatars (Moamen Eltouny becomes ME), plus null, nested and list checks for arrays.
 
 ### Optional Locales {icon="translate"}
-Pass a locale such as `de_DE` to format with Intl; leave it out for a deterministic English formatter.
+Pass a locale such as de_DE to format with Intl, or leave it out for a deterministic English formatter.
 :::
 
 :::info Quick Tip
