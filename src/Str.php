@@ -38,8 +38,8 @@ final class Str
 
         if (count($initials) > $limit) {
             $initials = $limit === 1
-                ? [$initials[0]]
-                : array_merge(array_slice($initials, 0, $limit - 1), [$initials[count($initials) - 1]]);
+                ? [array_first($initials)]
+                : array_merge(array_slice($initials, 0, $limit - 1), [array_last($initials)]);
         }
 
         return mb_strtoupper(implode('', $initials), 'UTF-8');
