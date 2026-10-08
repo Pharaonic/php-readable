@@ -17,7 +17,7 @@ final class Duration
     /**
      * Unit => [singular, plural, short].
      */
-    private const NAMES = [
+    private const array NAMES = [
         'year' => ['year', 'years', 'y'],
         'month' => ['month', 'months', 'mo'],
         'week' => ['week', 'weeks', 'w'],
@@ -30,7 +30,7 @@ final class Duration
     /**
      * Fixed-length units used for a bare number of seconds. Months are left out because they have no fixed length.
      */
-    private const SECONDS = [
+    private const array SECONDS = [
         'year' => 31536000, // 365 days
         'week' => 604800,
         'day' => 86400,

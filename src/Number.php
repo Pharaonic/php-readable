@@ -16,16 +16,16 @@ use Pharaonic\Readable\Support\Intl;
  */
 final class Number
 {
-    private const COMPACT_UNITS = ['', 'K', 'M', 'B', 'T'];
+    private const array COMPACT_UNITS = ['', 'K', 'M', 'B', 'T'];
 
-    private const ONES = [
+    private const array ONES = [
         'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
         'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
     ];
 
-    private const TENS = [2 => 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    private const array TENS = [2 => 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
 
-    private const SCALES = [
+    private const array SCALES = [
         '', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion',
         'sextillion', 'septillion', 'octillion', 'nonillion', 'decillion',
     ];
