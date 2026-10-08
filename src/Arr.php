@@ -48,14 +48,6 @@ final class Arr
      */
     public static function isList(array $array): bool
     {
-        $expected = 0;
-
-        foreach ($array as $key => $_) {
-            if ($key !== $expected++) {
-                return false;
-            }
-        }
-
-        return true;
+        return array_is_list($array);
     }
 }
