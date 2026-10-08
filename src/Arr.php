@@ -16,13 +16,7 @@ final class Arr
      */
     public static function isNull(array $array): bool
     {
-        foreach ($array as $value) {
-            if ($value !== null) {
-                return false;
-            }
-        }
-
-        return true;
+        return !array_any($array, static fn (mixed $value): bool => $value !== null);
     }
 
     /**
@@ -32,13 +26,7 @@ final class Arr
      */
     public static function isMultidimensional(array $array): bool
     {
-        foreach ($array as $value) {
-            if (is_array($value)) {
-                return true;
-            }
-        }
-
-        return false;
+        return array_any($array, static fn (mixed $value): bool => is_array($value));
     }
 
     /**
