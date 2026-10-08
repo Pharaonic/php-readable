@@ -1,0 +1,68 @@
+{
+    "name": "pharaonic/php-readable",
+    "description": "Framework-agnostic, human-friendly formatting for PHP: numbers, bytes, money, durations, plus small array and string inspection helpers.",
+    "keywords": [
+        "php",
+        "readable",
+        "human readable",
+        "number format",
+        "file size",
+        "bytes",
+        "money",
+        "currency",
+        "duration",
+        "pharaonic"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Moamen Eltouny (Raggi)",
+            "email": "raggigroup@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/Pharaonic/php-readable",
+    "support": {
+        "issues": "https://github.com/Pharaonic/php-readable/issues",
+        "source": "https://github.com/Pharaonic/php-readable",
+        "security": "https://github.com/Pharaonic/php-readable/security/policy"
+    },
+    "require": {
+        "php": ">=8.0 <8.1",
+        "ext-mbstring": "*"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.12 || ^2.0",
+        "phpunit/phpunit": "^9.6",
+        "squizlabs/php_codesniffer": "^3.13 || ^4.0"
+    },
+    "suggest": {
+        "ext-intl": "Required only when passing a $locale to the Number, Money and Bytes formatters."
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "Pharaonic\\Readable\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Pharaonic\\Readable\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse",
+        "lint": "phpcs",
+        "format": "phpcbf",
+        "check": [
+            "@lint",
+            "@analyse",
+            "@test"
+        ]
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
