@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented in this file.
 
-## 8.1.0 - Unreleased
+## 8.1.0 - 2026-10-08
 
 The `8.1.x` line targets PHP 8.1. Output is identical to `8.0.1`, except for `Duration::between()` on days with a daylight saving time change.
 
