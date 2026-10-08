@@ -2,7 +2,7 @@
 
 All notable changes to this project are documented in this file.
 
-## 8.3.0 - Unreleased
+## 8.3.0 - 2026-10-08
 
 The `8.3.x` line targets PHP 8.3. Output is identical to `8.2.0`.
 
@@ -13,7 +13,7 @@ The `8.3.x` line targets PHP 8.3. Output is identical to `8.2.0`.
 - Integers are formatted with `number_format()`, which keeps them exact since PHP 8.3, instead of a hand-written digit grouping.
 - PHPStan analyses against PHP 8.3, and CI falls back to PHP 8.3 on branches that are not an `8.N.x` line.
 
-## 8.2.0 - Unreleased
+## 8.2.0 - 2026-10-08
 
 The `8.2.x` line targets PHP 8.2. Output is identical to `8.1.0`.
 
@@ -22,7 +22,7 @@ The `8.2.x` line targets PHP 8.2. Output is identical to `8.1.0`.
 - **Requires PHP `>=8.2 <8.3`.** Use the `8.1.x` line on PHP 8.1.
 - PHPStan analyses against PHP 8.2, and CI falls back to PHP 8.2 on branches that are not an `8.N.x` line.
 
-## 8.1.0 - Unreleased
+## 8.1.0 - 2026-10-08
 
 The `8.1.x` line targets PHP 8.1. Output is identical to `8.0.1`, except for `Duration::between()` on days with a daylight saving time change.
 
