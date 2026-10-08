@@ -2,6 +2,16 @@
 
 All notable changes to this project are documented in this file.
 
+## 8.4.0 - Unreleased
+
+The `8.4.x` line targets PHP 8.4. Output is identical to `8.3.0`.
+
+### Changed
+
+- **Requires PHP `>=8.4 <8.5`.** Use the `8.3.x` line on PHP 8.3.
+- `Arr::isNull()` and `Arr::isMultidimensional()` use the native `array_any()`.
+- PHPStan analyses against PHP 8.4, and CI falls back to PHP 8.4 on branches that are not an `8.N.x` line.
+
 ## 8.3.0 - Unreleased
 
 The `8.3.x` line targets PHP 8.3. Output is identical to `8.2.0`.
