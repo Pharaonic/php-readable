@@ -2,6 +2,12 @@
 
 All notable changes to this project are documented in this file.
 
+## 8.0.2 - Unreleased
+
+### Changed
+
+- The development tooling moved to Pest, Pint and PHPStan at level `max`. `composer check` now validates `composer.json`, checks the code style, runs static analysis and the tests, and audits the dependencies. The library's output is unchanged.
+
 ## 8.0.1 - 2026-10-08
 
 ### Fixed
