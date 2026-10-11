@@ -14,14 +14,31 @@
 <h5 align="center">Format numbers, byte sizes, money and durations into readable text with predictable output, plus optional Intl locales.</h5>
 <br>
 
+## Installation
+
+```bash
+composer require pharaonic/php-readable
+```
+
+## Usage
+
+```php
+use Pharaonic\Readable\{Bytes, Duration, Money, Number};
+
+Number::compact(1250000);           // "1.3M"
+Bytes::format(1536, binary: true);  // "1.5 KiB"
+Money::format(1234.5, 'USD');       // "USD 1,234.50"
+Duration::format(3661);             // "1 hour 1 minute 1 second"
+```
+
 ## Documentation
 
-You can find the detailed documentation here in [PHP Readable Documentation](https://pharaonic.dev/packages/php/readable).
+Full documentation: [PHP Readable Documentation](https://pharaonic.dev/packages/php/readable).
 
-## Contributing
+## Support & Security
 
-Thank you for considering contributing to this package! Be one of Pharaonic team.
+See [SUPPORT.md](SUPPORT.md) and [SECURITY.md](SECURITY.md). Contributions are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
-This package is an open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT. See [LICENSE](LICENSE).
