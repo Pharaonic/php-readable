@@ -29,7 +29,7 @@ final class Bytes
         int|float $bytes,
         int $decimals = 2,
         bool $binary = false,
-        ?string $locale = null
+        ?string $locale = null,
     ): string {
         Assert::finite($bytes);
         Assert::decimals($decimals);
