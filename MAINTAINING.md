@@ -22,7 +22,7 @@ One branch per PHP minor, each requiring exactly that minor (`"php": ">=8.N <8.N
 - Without a `$locale`, output comes from the built-in English formatter and is identical on every machine, with or without `ext-intl`.
 - With a `$locale`, `ext-intl` is used; without it, `MissingIntlExtension` is thrown. Invalid locales never leak `ValueError` or `IntlException`.
 - Rounding is half away from zero everywhere, a rounded value carries to the next unit (`999 999 B` is `1 MB`), and no formatter prints negative zero.
-- Invalid input throws the native `InvalidArgumentException`.
+- Invalid input throws the native `InvalidArgumentException`. `$decimals` accepts 0 to 100, and exception messages quote at most 50 bytes of the rejected value.
 - Output changes are behavior changes: they need a changelog entry and must not land in a patch on an existing line unless they fix a bug.
 
 ## Package-specific constraints

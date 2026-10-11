@@ -2,6 +2,17 @@
 
 All notable changes to this project are documented in this file.
 
+## 8.2.2 - Unreleased
+
+### Fixed
+
+- `$decimals` above 100 throws `InvalidArgumentException` in `Number::format()`, `Number::compact()`, `Number::percentage()`, `Bytes::format()`, `Money::format()` and `Money::compact()`. Very large values used to exhaust memory with a fatal error, or return wrong digits with a locale: `Number::format(1.5, 100000000, false, 'en_US')` returned `"0"`.
+- Exception messages quote at most 50 bytes of the value they reject, so a huge input no longer ends up whole in a message or a log.
+
+### Compatibility
+
+- Decimals from 0 to 100 format exactly as before.
+
 ## 8.2.1 - 2026-10-11
 
 ### Changed
