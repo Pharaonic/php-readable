@@ -14,6 +14,8 @@ on:
       - '8.*.x'
       - develop
 
+  workflow_dispatch:
+
 permissions:
   contents: read
 
@@ -29,21 +31,46 @@ jobs:
       version: ${{ steps.php.outputs.version }}
 
     steps:
-      # Each "8.N.x" branch targets exactly PHP 8.N; any other branch uses the 8.1 baseline.
-      - name: Resolve PHP version from branch
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      # Every branch declares exactly one PHP minor (">=8.N <8.N+1"), so the
+      # version comes from composer.json on any branch.
+      - name: Detect target PHP version
         id: php
         shell: bash
         run: |
-          BRANCH="${GITHUB_BASE_REF:-${GITHUB_REF_NAME}}"
+          constraint="$(jq -r '.require.php' composer.json)"
 
-          if [[ "${BRANCH}" =~ ^8\.[0-9]+\.x$ ]]; then
-            PHP_VERSION="${BRANCH%.x}"
-          else
-            PHP_VERSION="8.1"
+          if [[ ! "$constraint" =~ ^\>=(8\.[0-9]+) ]]; then
+            echo "Cannot read the target PHP minor from require.php: $constraint" >&2
+            exit 1
           fi
 
-          echo "branch=${BRANCH} php=${PHP_VERSION}"
-          echo "version=${PHP_VERSION}" >> "$GITHUB_OUTPUT"
+          echo "version=${BASH_REMATCH[1]}" >> "$GITHUB_OUTPUT"
+
+  check:
+    name: Check
+    needs: php
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ needs.php.outputs.version }}
+          extensions: mbstring, intl
+          coverage: none
+          tools: composer:v2
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v4
+
+      - name: Check
+        run: composer check
 
   tests:
     name: Tests - ${{ matrix.os }} - ${{ matrix.dependencies }}${{ matrix.intl && ' - intl' || '' }}
@@ -82,9 +109,6 @@ jobs:
           coverage: none
           tools: composer:v2
 
-      - name: Validate Composer
-        run: composer validate --strict
-
       - name: Install dependencies
         uses: ramsey/composer-install@v4
         with:
@@ -92,29 +116,3 @@ jobs:
 
       - name: Run tests
         run: composer test
-
-  quality:
-    name: Static analysis & coding style
-    needs: php
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ needs.php.outputs.version }}
-          extensions: mbstring, intl
-          coverage: none
-          tools: composer:v2
-
-      - name: Install dependencies
-        uses: ramsey/composer-install@v4
-
-      - name: Coding style
-        run: composer lint
-
-      - name: PHPStan
-        run: composer analyse

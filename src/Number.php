@@ -40,7 +40,7 @@ final class Number
         int|float $number,
         int $decimals = 0,
         bool $trimZeros = false,
-        ?string $locale = null
+        ?string $locale = null,
     ): string {
         Assert::finite($number);
         Assert::decimals($decimals);
@@ -168,7 +168,7 @@ final class Number
         $words = self::spellInteger($integer);
 
         if ($fraction !== '') {
-            $digits = array_map(static fn (string $digit): string => self::ONES[(int) $digit], str_split($fraction));
+            $digits = array_map(static fn(string $digit): string => self::ONES[(int) $digit], str_split($fraction));
             $words .= ' point ' . implode(' ', $digits);
         }
 
