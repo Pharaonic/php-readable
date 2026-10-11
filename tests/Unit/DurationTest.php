@@ -114,3 +114,8 @@ it('passes the format options through', function () {
 it('rejects an invalid date', function () {
     Duration::between('not a date', 'now');
 })->throws(InvalidArgumentException::class);
+
+it('cuts a long invalid date in the error message', function () {
+    expect(thrownBy(fn() => Duration::between(str_repeat('x', 1000000), 'now'))->getMessage())
+        ->toBe('"' . str_repeat('x', 50) . '…" is not a valid date.');
+});
