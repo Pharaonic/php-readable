@@ -14,3 +14,14 @@ function withoutIntl(): bool
 {
     return ! extension_loaded('intl');
 }
+
+function thrownBy(callable $callback): Throwable
+{
+    try {
+        $callback();
+    } catch (Throwable $exception) {
+        return $exception;
+    }
+
+    throw new LogicException('Nothing was thrown.');
+}
