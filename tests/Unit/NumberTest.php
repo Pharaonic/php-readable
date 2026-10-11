@@ -233,3 +233,40 @@ it('spells a number with a locale', function () {
 it('needs ext-intl to spell a number with a locale', function () {
     Number::spell(1, 'en');
 })->skip(! withoutIntl(), 'ext-intl is installed.')->throws(MissingIntlExtension::class);
+
+it('accepts up to 100 decimals', function () {
+    expect(Number::format(1.5, 100))->toBe('1.5' . str_repeat('0', 99))
+        ->and(Number::percentage(0.5, 100))->toBe('50.' . str_repeat('0', 100) . '%')
+        ->and(Number::compact(1500, 100))->toBe('1.5K');
+});
+
+it('rejects more than 100 decimals', function (string $method, array $arguments) {
+    Number::$method(...$arguments);
+})->with([
+    'format' => ['format', [1.5, 101]],
+    'compact' => ['compact', [1.5, 101]],
+    'percentage' => ['percentage', [0.5, 101]],
+    'int max' => ['format', [1.5, PHP_INT_MAX]],
+])->throws(InvalidArgumentException::class, 'Decimals must be between 0 and 100');
+
+it('rejects more than 100 decimals with a locale', function () {
+    Number::format(1.5, 101, false, 'en_US');
+})->skip(withoutIntl(), 'ext-intl is not installed.')->throws(InvalidArgumentException::class);
+
+it('cuts a long invalid locale in the error message', function () {
+    $exception = thrownBy(fn() => Number::format(1, 0, false, str_repeat('x', 10000)));
+
+    // Older ICU builds accept any locale and fall back to the root locale.
+    if ($exception instanceof LogicException && $exception->getMessage() === 'Nothing was thrown.') {
+        expect(true)->toBeTrue();
+
+        return;
+    }
+
+    expect($exception->getMessage())->toBe('"' . str_repeat('x', 50) . '…" is not a valid locale.');
+})->skip(withoutIntl(), 'ext-intl is not installed.');
+
+it('cuts a long locale in the missing intl message', function () {
+    expect(thrownBy(fn() => Number::format(1, 0, false, str_repeat('x', 10000)))->getMessage())
+        ->toStartWith('Formatting for locale "' . str_repeat('x', 50) . '…" requires the intl extension.');
+})->skip(! withoutIntl(), 'ext-intl is installed.');
