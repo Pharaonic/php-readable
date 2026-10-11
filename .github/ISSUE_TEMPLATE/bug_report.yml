@@ -1,6 +1,8 @@
 name: Bug report
 description: Report something that is not working as expected.
-labels: [bug]
+labels:
+  - "type: bug"
+  - "status: needs triage"
 body:
   - type: input
     id: package-version
