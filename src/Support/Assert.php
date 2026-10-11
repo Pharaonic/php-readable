@@ -11,6 +11,11 @@ use InvalidArgumentException;
  */
 final class Assert
 {
+    /**
+     * Far beyond any display need. Larger values exhaust memory in number_format() or make Intl return wrong digits.
+     */
+    private const MAX_DECIMALS = 100;
+
     public static function finite(int|float $number): void
     {
         if (is_float($number) && !is_finite($number)) {
@@ -20,8 +25,10 @@ final class Assert
 
     public static function decimals(int $decimals): void
     {
-        if ($decimals < 0) {
-            throw new InvalidArgumentException(sprintf('Decimals must be zero or greater, %d given.', $decimals));
+        if ($decimals < 0 || $decimals > self::MAX_DECIMALS) {
+            throw new InvalidArgumentException(
+                sprintf('Decimals must be between 0 and %d, %d given.', self::MAX_DECIMALS, $decimals),
+            );
         }
     }
 }

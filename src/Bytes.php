@@ -6,6 +6,7 @@ namespace Pharaonic\Readable;
 
 use InvalidArgumentException;
 use Pharaonic\Readable\Support\Assert;
+use Pharaonic\Readable\Support\Excerpt;
 
 /**
  * Readable byte sizes.
@@ -67,7 +68,7 @@ final class Bytes
         $pattern = '/^\s*([+-]?(?:\d+(?:\.\d*)?|\.\d+))\s*(?:([kmgtpezy])(i)?b|b|bytes?)?\s*$/i';
 
         if (preg_match($pattern, $size, $match) !== 1) {
-            throw new InvalidArgumentException(sprintf('Cannot parse "%s" as a byte size.', $size));
+            throw new InvalidArgumentException(sprintf('Cannot parse %s as a byte size.', Excerpt::quote($size)));
         }
 
         $multiplier = 1;
@@ -85,7 +86,7 @@ final class Bytes
 
         // 2^63 is the first float above PHP_INT_MAX.
         if ($bytes >= 9.2233720368547758E18 || $bytes < -9.2233720368547758E18) {
-            throw new InvalidArgumentException(sprintf('"%s" is too large to be represented in bytes.', $size));
+            throw new InvalidArgumentException(sprintf('%s is too large to be represented in bytes.', Excerpt::quote($size)));
         }
 
         return (int) $bytes;
@@ -117,6 +118,6 @@ final class Bytes
             }
         }
 
-        throw new InvalidArgumentException(sprintf('"%s" is too large to be represented in bytes.', $size));
+        throw new InvalidArgumentException(sprintf('%s is too large to be represented in bytes.', Excerpt::quote($size)));
     }
 }
