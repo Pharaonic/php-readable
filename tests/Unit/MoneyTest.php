@@ -92,3 +92,15 @@ it('returns the ISO 4217 fraction digits of a currency', function (string $curre
     'CLF' => ['CLF', 4],
     'lowercase' => ['jpy', 0],
 ]);
+
+it('rejects more than 100 decimals', function (string $method, array $arguments) {
+    Money::$method(...$arguments);
+})->with([
+    'format' => ['format', [1, 'USD', 101]],
+    'compact' => ['compact', [1, 'USD', 101]],
+])->throws(InvalidArgumentException::class, 'Decimals must be between 0 and 100, 101 given.');
+
+it('cuts a long currency code in the error message', function () {
+    expect(thrownBy(fn() => Money::format(1, str_repeat('X', 1000)))->getMessage())
+        ->toBe('"' . str_repeat('X', 50) . '…" is not a three-letter ISO 4217 currency code.');
+});
