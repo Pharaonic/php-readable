@@ -41,7 +41,7 @@ final class Intl
         // Newer PHP/ICU builds reject unknown locales (ValueError, IntlException); older ones fall back to root.
         try {
             $formatter = new NumberFormatter($locale, $style);
-        } catch (ValueError | IntlException $exception) {
+        } catch (ValueError|IntlException $exception) {
             throw new InvalidArgumentException(sprintf('"%s" is not a valid locale.', $locale), 0, $exception);
         }
         $formatter->setAttribute(NumberFormatter::ROUNDING_MODE, NumberFormatter::ROUND_HALFUP);
