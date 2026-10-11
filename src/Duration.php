@@ -9,6 +9,7 @@ use DateTimeInterface;
 use DateTimeZone;
 use Exception;
 use InvalidArgumentException;
+use Pharaonic\Readable\Support\Excerpt;
 
 /**
  * Readable durations in English: "1 hour 1 minute", or "1h 1m" in short form.
@@ -167,7 +168,7 @@ final class Duration
         try {
             return new DateTimeImmutable($value);
         } catch (Exception $exception) {
-            throw new InvalidArgumentException(sprintf('"%s" is not a valid date.', $value), 0, $exception);
+            throw new InvalidArgumentException(sprintf('%s is not a valid date.', Excerpt::quote($value)), 0, $exception);
         }
     }
 }

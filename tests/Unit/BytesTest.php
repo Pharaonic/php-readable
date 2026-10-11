@@ -120,3 +120,28 @@ it('rejects a size it cannot parse', function (string $size) {
     'one yotta overflows' => ['1 YB'],
     'huge' => ['1000 YB'],
 ])->throws(InvalidArgumentException::class);
+
+it('rejects more than 100 decimals', function () {
+    Bytes::format(1500, 101);
+})->throws(InvalidArgumentException::class, 'Decimals must be between 0 and 100, 101 given.');
+
+it('quotes a short unparsable size whole in the error message', function () {
+    expect(thrownBy(fn () => Bytes::parse('10 K'))->getMessage())->toBe('Cannot parse "10 K" as a byte size.');
+});
+
+it('cuts a long unparsable size in the error message', function () {
+    expect(thrownBy(fn () => Bytes::parse(str_repeat('x', 1000000)))->getMessage())
+        ->toBe('Cannot parse "' . str_repeat('x', 50) . '…" as a byte size.');
+});
+
+it('cuts a long oversized size in the error message', function () {
+    expect(thrownBy(fn () => Bytes::parse(str_repeat('9', 1000)))->getMessage())
+        ->toBe('"' . str_repeat('9', 50) . '…" is too large to be represented in bytes.');
+});
+
+it('never cuts a multibyte character in the error message', function () {
+    $message = thrownBy(fn () => Bytes::parse('x' . str_repeat('é', 100)))->getMessage();
+
+    expect(mb_check_encoding($message, 'UTF-8'))->toBeTrue()
+        ->and($message)->toBe('Cannot parse "x' . str_repeat('é', 24) . '…" as a byte size.');
+});
