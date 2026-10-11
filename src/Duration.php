@@ -49,7 +49,7 @@ final class Duration
         int $seconds,
         ?int $parts = null,
         bool $short = false,
-        string $separator = ' '
+        string $separator = ' ',
     ): string {
         $values = [];
 
@@ -76,7 +76,7 @@ final class Duration
         DateTimeInterface|int|string $end,
         ?int $parts = null,
         bool $short = false,
-        string $separator = ' '
+        string $separator = ' ',
     ): string {
         $interval = self::date($start)->diff(self::date($end));
 

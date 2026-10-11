@@ -16,7 +16,7 @@ final class MissingIntlExtension extends RuntimeException
         return new self(sprintf(
             'Formatting for locale "%s" requires the intl extension. '
             . 'Install ext-intl or omit the locale to use the built-in English formatter.',
-            $locale
+            $locale,
         ));
     }
 }
