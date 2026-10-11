@@ -42,7 +42,7 @@ final class Intl
         try {
             $formatter = new NumberFormatter($locale, $style);
         } catch (ValueError | IntlException $exception) {
-            throw new InvalidArgumentException(sprintf('"%s" is not a valid locale.', $locale), 0, $exception);
+            throw new InvalidArgumentException(sprintf('%s is not a valid locale.', Excerpt::quote($locale)), 0, $exception);
         }
         $formatter->setAttribute(NumberFormatter::ROUNDING_MODE, NumberFormatter::ROUND_HALFUP);
 
