@@ -53,4 +53,4 @@ Every method is `public static`. Methods marked *throws* raise `InvalidArgumentE
 | Class | Extends | Thrown when |
 | --- | --- | --- |
 | `Pharaonic\Readable\Exceptions\MissingIntlExtension` | `RuntimeException` | A `$locale` is passed but `ext-intl` isn't loaded. |
-| `InvalidArgumentException` (PHP) | `LogicException` | `INF`/`NAN`, negative decimals, `parts` or `limit` below 1, a malformed currency code, an unparsable size or date, invalid UTF-8, or a locale Intl rejects. |
+| `InvalidArgumentException` (PHP) | `LogicException` | `INF`/`NAN`, decimals below 0 or above 100, `parts` or `limit` below 1, a malformed currency code, an unparsable size or date, invalid UTF-8, or a locale Intl rejects. |
