@@ -36,7 +36,7 @@ final class Money
         int|float $amount,
         string $currency,
         ?int $decimals = null,
-        ?string $locale = null
+        ?string $locale = null,
     ): string {
         Assert::finite($amount);
         $currency = self::currency($currency);
@@ -89,7 +89,7 @@ final class Money
 
         if (preg_match('/^[A-Z]{3}$/', $code) !== 1) {
             throw new InvalidArgumentException(
-                sprintf('"%s" is not a three-letter ISO 4217 currency code.', $currency)
+                sprintf('"%s" is not a three-letter ISO 4217 currency code.', $currency),
             );
         }
 
