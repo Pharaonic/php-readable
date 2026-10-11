@@ -71,11 +71,11 @@ docs/
 ## Run checks
 
 ```bash
-composer test      # PHPUnit
-composer analyse   # PHPStan (level 9)
-composer lint      # PHP_CodeSniffer (PSR-12); `composer format` fixes most issues
-composer check     # all of the above
-composer validate --strict
+composer test           # Pest
+composer analyse        # PHPStan (level max)
+composer format:check   # Pint; `composer format` fixes the style
+composer security       # Composer audit
+composer check          # composer validate --strict and all of the above
 ```
 
 All checks must pass. CI also runs the tests with the lowest allowed dependency versions and without `ext-intl`.
