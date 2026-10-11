@@ -1,23 +1,15 @@
 ## Summary
 
-<!-- What does this pull request do, and why? Link related issues (e.g. "Closes #123"). -->
+Explain what changed and why.
 
 ## Changes
 
--
+Describe the meaningful implementation or API changes.
 
-## Testing
+## Compatibility
 
-<!-- How was this tested? Include example inputs and the output they produce, with and without ext-intl if relevant. -->
+Describe compatibility or deprecation impact when relevant.
 
-## Backward compatibility
+## Notes
 
-<!-- Does this change any existing output or public API? If so, describe the impact. -->
-
-## Checklist
-
-- [ ] Tests added/updated
-- [ ] PHPStan passes (`composer analyse`)
-- [ ] Coding style passes (`composer lint`)
-- [ ] `CHANGELOG.md` updated if applicable
-- [ ] Documentation updated if applicable
+Add reviewer context only when useful.
