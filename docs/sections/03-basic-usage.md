@@ -29,5 +29,5 @@ Money::format(1234.5, 'USD', decimals: 0);  // "USD 1,235"
 
 - **Rounding** is half away from zero, like `number_format()`: `Number::format(2.5)` is `"3"` and `Number::format(-2.5)` is `"-3"`.
 - **No negative zero.** A negative value that rounds to zero prints as zero: `Number::format(-0.001, 2)` is `"0.00"`.
-- **Invalid input throws `InvalidArgumentException`:** `INF`, `NAN`, negative decimals, a malformed currency code, an unparsable size, or a date string PHP cannot read.
+- **Invalid input throws `InvalidArgumentException`:** `INF`, `NAN`, decimals below 0 or above 100, a malformed currency code, an unparsable size, or a date string PHP cannot read.
 - **No state.** There is no global configuration; everything a call needs is in its arguments.
