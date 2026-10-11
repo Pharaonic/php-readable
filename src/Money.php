@@ -6,6 +6,7 @@ namespace Pharaonic\Readable;
 
 use InvalidArgumentException;
 use Pharaonic\Readable\Support\Assert;
+use Pharaonic\Readable\Support\Excerpt;
 use Pharaonic\Readable\Support\Intl;
 
 /**
@@ -89,7 +90,7 @@ final class Money
 
         if (preg_match('/^[A-Z]{3}$/', $code) !== 1) {
             throw new InvalidArgumentException(
-                sprintf('"%s" is not a three-letter ISO 4217 currency code.', $currency),
+                sprintf('%s is not a three-letter ISO 4217 currency code.', Excerpt::quote($currency)),
             );
         }
 
