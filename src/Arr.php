@@ -16,7 +16,7 @@ final class Arr
      */
     public static function isNull(array $array): bool
     {
-        return !array_any($array, static fn (mixed $value): bool => $value !== null);
+        return !array_any($array, static fn(mixed $value): bool => $value !== null);
     }
 
     /**
@@ -26,7 +26,7 @@ final class Arr
      */
     public static function isMultidimensional(array $array): bool
     {
-        return array_any($array, static fn (mixed $value): bool => is_array($value));
+        return array_any($array, static fn(mixed $value): bool => is_array($value));
     }
 
     /**
