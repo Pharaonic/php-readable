@@ -6,3 +6,6 @@ contact_links:
   - name: Community support
     url: https://discord.gg/XQG9RhvEvf
     about: Get help from the Pharaonic Discord community.
+  - name: Security vulnerability
+    url: https://github.com/Pharaonic/php-readable/security
+    about: Do not report security vulnerabilities in public issues.
